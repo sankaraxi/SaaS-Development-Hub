@@ -1,13 +1,22 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 import pathlib
 
 this_file_path = pathlib.Path(__file__).resolve().parent # get the path of this file
 print(this_file_path) 
 
 def home_page_view(request):
+    title = "This Page And is the Home Page"
+    my_Content = {
+        "myPage": title,
+    }
+
+    html_template = "demo.html"
+    return render(request, html_template, my_Content) 
+
+def old_home_page_view(request):
     # html_file = this_file_path / "demo.html"
     # html_ = html_file.read_text()
-
     title = "This Page And is the Home Page"
 
     my_Content = {
@@ -29,5 +38,5 @@ def home_page_view(request):
         </body>
         </html>
     """.format(**my_Content)
-    
-    return HttpResponse(html_)  
+
+    return HttpResponse(html_)
